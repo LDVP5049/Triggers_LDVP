@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Triggers_LDVP.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Style.Triggers>
+                    <Trigger TargetType="Entry" Property="IsFocused" Value="True">
+                        <Setter Property="BackgroundColor" Value="Yellow" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="Button">
+                <Style.Triggers>
+                    <DataTrigger TargetType="Button"
+                                 Binding="{Binding Source={x:Reference entry},
+                                           Path=Text.Length}"
+                                 Value="0">
+                        <Setter Property="IsEnabled" Value="False" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="RadioButton">
+                <Style.Triggers>
+                    <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                        <Setter Property="BackgroundColor" Value="Yellow" />
+                        <Setter Property="TextColor" Value="Black" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="Center">
+        <Label Text="Tell me the secret"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+
+        <Entry Placeholder="Type the secret here."
+               VerticalOptions="Center"
+               HorizontalOptions="Center">
+            <Entry.Triggers>
+                <Trigger TargetType="Entry"
+                         Property="Text"
+                         Value="The text color is red">
+                    <Setter Property="TextColor" Value="Red" />
+                </Trigger>
+            </Entry.Triggers>
+        </Entry>
+
+        <Entry x:Name="entry"
+               Text=""
+               Placeholder="required field" />
+
+        <Button x:Name="button" Text="Save"
+                FontSize="Large"
+                HorizontalOptions="Center">
+        </Button>
+
+        <RadioButton Content="Option 1" />
+        <RadioButton Content="Option 2" />
+        <RadioButton Content="Option 3" />
+    </StackLayout>
+</ContentPage>
